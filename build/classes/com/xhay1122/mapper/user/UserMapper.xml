@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xhay1122.dao.user.UserDao">
+
+	<!-- 添加用户 -->
+	<insert id="insertUser" parameterType="com.xhay1122.entity.user.User">
+	 <![CDATA[   
+		insert into TestUser ( userId, userName, userPassword, userBirth, userAddress, userStatus, userPhone)
+         values(#{userId}, #{userName}, #{userPassword}, #{userBirth}, #{userAddress}, #{userStatus}, #{userPhone})	
+	]]>
+	</insert>
+
+	<!-- 根据用户名和密码查询用户 -->
+	<select id="selectUserByNameAndPassword" parameterType="com.xhay1122.entity.user.User"
+		resultType="com.xhay1122.entity.user.User">
+		<![CDATA[   
+			select * from TestUser 
+		]]>
+		<where>
+			<if test="userName != null">
+				userName = #{userName}
+			</if>
+			<if test="userPassword != null">
+				AND userPassword = #{userPassword}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectAllUsers" resultType="com.xhay1122.entity.user.User">
+		<![CDATA[   
+			select * from TestUser 
+		]]>
+	</select>
+</mapper>
